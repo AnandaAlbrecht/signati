@@ -1,0 +1,36 @@
+Primeira Etapa
+
+    •Relatório com:
+        o Descrição do projeto: [1 ponto]
+            ▪ Qual problema o sistema resolve?
+
+    ▪ Por que e para que(m) o sistema e útil?
+        o Diagrama de classes do sistema [2 pontos]
+        o Design das telas [2 pontos]
+            ▪ Sugestão de software: https://marvelapp.com e http://framer.com
+
+    • Rotas (ao menos 5) [1.5 ponto]
+        o Apresentem como será o o padrão de rotas do sistema (pelo menos 5 rotas)
+
+    • Views [1.5 ponto]
+        o Implementem, ao menos, as views para algumas requisições (rotas)
+        o Para as views que submetam formulários, desenvolvam algumas validações para os campos dos formulários
+
+    • Vídeo de apresentação do problema e resultados (até 10 min): [2 pontos]
+        o Todos os integrantes devem participar;
+        o Mostrar, durante a apresentação do sistema, o acesso/requisição as rotas/recursos e views do sistema
+
+
+Segunda Etapa
+
+    • Sistema completo com as operações requisições CRUD para todas as classes/entidades do sistema: [8 pontos]
+        o Criação/inserção de novos dados;
+        o Leitura e apresentação de dados;
+        o Alteração de dados;
+        o Exclusão de dados;
+
+    • Vídeo de apresentação do problema e resultados (até 10 min): [2 pontos]
+        o Todos os integrantes devem participar;
+        o Mostrar, durante a apresentação do sistema, as operações de CRUD para cada entidade do sistema;
+
+    • Autenticação de Usuários [1 ponto extra]
