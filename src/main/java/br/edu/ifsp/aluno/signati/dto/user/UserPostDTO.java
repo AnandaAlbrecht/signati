@@ -1,4 +1,4 @@
-package br.edu.ifsp.aluno.signati.dto;
+package br.edu.ifsp.aluno.signati.dto.user;
 
 import br.edu.ifsp.aluno.signati.models.User;
 import javax.validation.constraints.Email;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreationDTO {
+public class UserPostDTO {
 
   @NotEmpty
   private String name;

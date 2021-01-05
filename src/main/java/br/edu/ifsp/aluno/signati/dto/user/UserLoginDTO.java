@@ -1,4 +1,4 @@
-package br.edu.ifsp.aluno.signati.dto;
+package br.edu.ifsp.aluno.signati.dto.user;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
