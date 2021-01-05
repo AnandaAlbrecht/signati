@@ -1,10 +1,14 @@
 package br.edu.ifsp.aluno.signati.services;
 
-import br.edu.ifsp.aluno.signati.dto.UserCreationDTO;
-import br.edu.ifsp.aluno.signati.dto.UserLoginDTO;
+import br.edu.ifsp.aluno.signati.dto.user.UserGetAllDTO;
+import br.edu.ifsp.aluno.signati.dto.user.UserPostDTO;
+import br.edu.ifsp.aluno.signati.dto.user.UserLoginDTO;
 import br.edu.ifsp.aluno.signati.models.User;
 import br.edu.ifsp.aluno.signati.repositories.UserRepository;
-import com.fasterxml.jackson.databind.util.ClassUtil;
+import java.security.PublicKey;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +20,7 @@ public class UserService {
   private final UserRepository userRepository;
   private final BCryptPasswordEncoder encoder;
 
-  public User createUser(UserCreationDTO dto) {
+  public User createUser(UserPostDTO dto) {
 
     this.userRepository.findUserByEmail(dto.getEmail()).ifPresent(u -> {
       throw new RuntimeException(String.format("User %s", u.getEmail()));
@@ -33,6 +37,23 @@ public class UserService {
     return this.userRepository
         .findUserByEmail(userLogin.getEmail())
         .filter(user -> this.encoder.matches(userLogin.getPassword(), user.getPassword()))
-        .orElseThrow(() -> new RuntimeException("User not found"));
+        .orElseThrow(this.userNotFound());
+  }
+
+  public User findUserById(Integer id) {
+
+    return this.userRepository.findById(id)
+        .orElseThrow(this.userNotFound());
+  }
+
+  public List<UserGetAllDTO> getAllUsers() {
+
+    return this.userRepository.findAll().stream()
+        .map(UserGetAllDTO::toDTO)
+        .collect(Collectors.toList());
+  }
+
+  private Supplier userNotFound() {
+    return () -> new RuntimeException("User not found");
   }
 }
