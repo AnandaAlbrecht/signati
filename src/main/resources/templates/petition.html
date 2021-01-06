@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head th:replace="~{fragments::head('Home')}">
+</head>
+
+<!--<head>
+    &lt;!&ndash; Required meta tags &ndash;&gt;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    &lt;!&ndash; Bootstrap CSS &ndash;&gt;
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title></title>
+</head>-->
+
+<body style="background-color: black">
+
+<header th:replace="~{fragmentos :: header}">
+</header>
+<!--<header>
+    <div class="container justify-content-around" style="font-size: xxx-large; color: white">
+        <div class="row justify-content-end">
+            <div class="col-3">
+                Signati
+                <img class="mb-3" src="feather_white.png" alt="" style="width:50px;height:50px;">
+            </div>
+            <div class="col-6"></div>
+            <div class="col-3 pl-5">
+                <button class="btn btn-primary">Nova Petição</button>
+                <button class="btn btn-primary">Home</button>
+            </div>
+        </div>
+    </div>
+</header>-->
+
+<div class="container p-5" style="background-color: white">
+    <div class="row justify-content-around" style="font-size: xxx-large">
+        Petição
+    </div>
+
+    <!-- Falta recuperar os dados da Petição - talvez seja usar th:classapend (não sei) -->
+    <div class="row">
+        <div class="container mt-5 mx-5 p-5" style="background:rgba(51, 170, 255, 0.25);">
+            <div class="row justify-content-end">
+                <div class="col-10" style=" font-size: x-large;">
+                        <span th:text="${petition.title}">
+                            Título
+                        </span>
+                </div>
+                <div class="col-2">
+                    <img class="mb-3" th:src="@{/images/feather_black.png}" alt="" style="width:50px;height:50px;">
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-10" style=" font-size: large;">
+                        <span th:text="${petition.content}">
+                            Conteúdo
+                        </span>
+                </div>
+                <div class="col-2">
+                    <span th:text="${petition.signatures}">
+                        000
+                    </span>
+                    <br><br><br>
+                    <span th:text="${petition.author}">
+                        Autor
+                    </span>
+                </div>
+            </div>
+            <div class="row justify-content-end mt-5">
+                <div class="col-12">
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Email">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary px-5" type="button">Assinar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
