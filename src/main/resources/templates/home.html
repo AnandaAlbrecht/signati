@@ -38,9 +38,9 @@
         <div class="row justify-content-around" style="font-size: xxx-large">
             Petições
         </div>
-        <div class="row" th:replace="~{fragments::petition}">
-        </div>
-        <!--<div class="row">
+        <!--<div class="row" th:replace="~{fragments::petition}">
+        </div>-->
+        <div class="row" th:each="petition">
             <div class="container mt-5 mx-5 p-5" style="background:rgba(51, 170, 255, 0.25);">
                 <div class="row justify-content-end">
                     <div class="col-2">
@@ -48,18 +48,24 @@
                     </div>
                 </div>
                 <div class="row justify-content-end">
-                    <div class="col-10" style=" font-size: x-large;">Título</div>
+                    <div class="col-10" style=" font-size: x-large;">
+                        <span th:text="${petition.title}">
+                            Título
+                        </span>
+                    </div>
                     <div class="col-2">
-                        000
+                        <span th:text="${petition.signatures}">
+                            000
+                        </span>
                     </div>
                 </div>
                 <div class="row justify-content-end">
                     <div class="col-2">
-                        <button class="btn btn-primary">Ver</button>
+                        <button class="btn btn-primary" th:onclick="'window.location.href=\'@{/petition/{petitionId}(petitionId = ${petition.id})}''">Ver</button>
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
     </div>
 </body>
 </html>
