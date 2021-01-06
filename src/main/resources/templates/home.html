@@ -2,7 +2,64 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragments::head('Home')}">
 </head>
-<body>
+<!--<head>
+    &lt;!&ndash; Required meta tags &ndash;&gt;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    &lt;!&ndash; Bootstrap CSS &ndash;&gt;
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title></title>
+</head>-->
+<body style="background-color: black">
+
+    <header th:replace="~{fragmentos :: header}">
+    </header>
+    <!--<header>
+        <div class="container justify-content-around" style="font-size: xxx-large; color: white">
+            <div class="row justify-content-end">
+                <div class="col-3">
+                    Signati
+                    <img class="mb-3" src="feather_white.png" alt="" style="width:50px;height:50px;">
+                </div>
+                <div class="col-6"></div>
+                <div class="col-3 pl-5">
+                    <button class="btn btn-primary" >Nova Petição</button>
+                    <button class="btn btn-primary">Home</button>
+                </div>
+            </div>
+        </div>
+    </header>-->
+
+    <div class="container p-5" style="background-color: white">
+        <div class="row justify-content-around" style="font-size: xxx-large">
+            Petições
+        </div>
+        <div class="row" th:replace="~{fragments::petition}">
+        </div>
+        <!--<div class="row">
+            <div class="container mt-5 mx-5 p-5" style="background:rgba(51, 170, 255, 0.25);">
+                <div class="row justify-content-end">
+                    <div class="col-2">
+                        <img class="mb-3" src="feather_black.png" alt="" style="width:50px;height:50px;">
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col-10" style=" font-size: x-large;">Título</div>
+                    <div class="col-2">
+                        000
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col-2">
+                        <button class="btn btn-primary">Ver</button>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
 </body>
 </html>
