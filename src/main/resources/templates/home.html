@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments::head('Home')}">
 </head>
 <!--<head>
@@ -16,7 +16,7 @@
 </head>-->
 <body style="background-color: black">
 
-    <header th:replace="~{fragmentos :: header}">
+    <header th:replace="~{fragments :: header}">
     </header>
     <!--<header>
         <div class="container justify-content-around" style="font-size: xxx-large; color: white">
@@ -40,11 +40,11 @@
         </div>
         <!--<div class="row" th:replace="~{fragments::petition}">
         </div>-->
-        <div class="row" th:each="petition">
+        <div class="row" th:each="petition : ${petitions}">
             <div class="container mt-5 mx-5 p-5" style="background:rgba(51, 170, 255, 0.25);">
                 <div class="row justify-content-end">
                     <div class="col-2">
-                        <img class="mb-3" src="feather_black.png" alt="" style="width:50px;height:50px;">
+                        <img class="mb-3" th:src="@{/images/feather_black.png}" alt="" style="width:50px;height:50px;">
                     </div>
                 </div>
                 <div class="row justify-content-end">
@@ -54,14 +54,14 @@
                         </span>
                     </div>
                     <div class="col-2">
-                        <span th:text="${petition.signatures}">
+                        <span th:text="${#lists.size(petition.signatures)}">
                             000
                         </span>
                     </div>
                 </div>
                 <div class="row justify-content-end">
                     <div class="col-2">
-                        <button class="btn btn-primary" th:onclick="'window.location.href=\'@{/petition/{petitionId}(petitionId = ${petition.id})}''">Ver</button>
+                        <a th:href="@{/petitions/{id}(id=${petition.id})}"><button class="btn btn-primary" >Ver</button> </a>
                     </div>
                 </div>
             </div>
