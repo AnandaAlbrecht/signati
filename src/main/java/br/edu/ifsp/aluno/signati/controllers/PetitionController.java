@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/petitions")
@@ -30,10 +31,12 @@ public class PetitionController {
   }
 
   @GetMapping("/{petitionId}")
-  @ResponseBody
-  public GetPetitionDTO getPetition(@PathVariable Integer petitionId) {
+  public ModelAndView getPetition(@PathVariable Integer petitionId) {
 
-    return this.petitionService.getPetitionDTOById(petitionId);
+    var dto = this.petitionService.getPetitionDTOById(petitionId);
+    var mv = new ModelAndView("petition");
+    mv.addObject("petition", dto);
+    return mv;
   }
 
   @GetMapping

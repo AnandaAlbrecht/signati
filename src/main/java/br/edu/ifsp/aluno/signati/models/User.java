@@ -28,7 +28,5 @@ public class User {
 
   private String password;
 
-  @OneToMany(mappedBy = "author")
-  private List<Signature> signatures;
 
 }

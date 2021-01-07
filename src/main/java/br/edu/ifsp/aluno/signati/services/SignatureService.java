@@ -18,7 +18,7 @@ public class SignatureService {
   public void postSignature(Integer petitionId, PostSignatureDTO postSignatureDTO) {
 
     var signature = Signature.builder()
-        .author(userService.findUserById(postSignatureDTO.getAuthorId()))
+        .author(postSignatureDTO.getAuthor())
         .petition(petitionService.findPetitionById(petitionId))
         .build();
 

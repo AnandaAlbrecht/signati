@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostSignatureDTO {
 
-  private Integer authorId;
+  private String author;
 }
