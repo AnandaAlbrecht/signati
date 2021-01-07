@@ -1,0 +1,15 @@
+.span-texatarea {
+    overflow: auto;
+    height: 8rem;
+    resize: vertical;
+    vertical-align: top !important;
+    text-transform: none;
+    color: inherit;
+    font: inherit;
+    border: none;
+    outline: 0;
+    margin: 0;
+    white-space: pre-wrap !important;
+    word-wrap: break-word;
+    word-break: break-all;
+}
