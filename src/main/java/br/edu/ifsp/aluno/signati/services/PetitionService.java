@@ -21,7 +21,6 @@ public class PetitionService {
   public GetPetitionDTO postPetition(PetitionPostDTO postDTO) {
 
     var petition = postDTO.toPetition();
-    petition.setAuthor(this.userService.findUserById(postDTO.getAuthorId()));
 
     return this.petitionRepository.save(petition).toDTO();
   }

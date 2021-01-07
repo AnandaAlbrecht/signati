@@ -25,7 +25,6 @@ public class UserGetAllDTO {
     return UserGetAllDTO.builder()
         .email(user.getEmail())
         .name(user.getName())
-        .signatures(SignatureDTO.signatureDTOList(user.getSignatures()))
         .build();
   }
 

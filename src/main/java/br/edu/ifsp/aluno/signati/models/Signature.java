@@ -27,9 +27,6 @@ public class Signature {
   @ManyToOne
   private Petition petition;
 
-  @ManyToOne
-  private User author;
+  private String author;
 
-  @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-  private LocalDateTime timestamp;
 }

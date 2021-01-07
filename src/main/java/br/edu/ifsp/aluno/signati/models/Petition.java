@@ -1,10 +1,8 @@
 package br.edu.ifsp.aluno.signati.models;
 
 import br.edu.ifsp.aluno.signati.dto.petition.GetPetitionDTO;
-import br.edu.ifsp.aluno.signati.dto.petition.GetPetitionDTO.AuthorDTO;
 import br.edu.ifsp.aluno.signati.dto.petition.GetPetitionDTO.SignatureDTO;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
@@ -14,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,8 +32,7 @@ public class Petition {
 
   private String content;
 
-  @OneToOne
-  private User author;
+  private String author;
 
   @OneToMany(mappedBy = "petition", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<Signature> signatures;
@@ -45,7 +41,7 @@ public class Petition {
 
     return GetPetitionDTO.builder()
         .id(this.getId())
-        .author(AuthorDTO.toDTO(this.getAuthor()))
+        .author(this.author)
         .title(this.getTitle())
         .content(this.getContent())
         .signatures(Optional.ofNullable(this.getSignatures())

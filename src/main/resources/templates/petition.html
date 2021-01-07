@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragments::head('Home')}">
 </head>
@@ -20,7 +20,7 @@
 
 <body style="background-color: black">
 
-<header th:replace="~{fragmentos :: header}">
+<header th:replace="~{fragments :: header}">
 </header>
 <!--<header>
     <div class="container justify-content-around" style="font-size: xxx-large; color: white">
@@ -44,8 +44,8 @@
     </div>
 
     <!-- Falta recuperar os dados da Petição - talvez seja usar th:classapend (não sei) -->
-    <div class="row">
-        <div class="container mt-5 mx-5 p-5" style="background:rgba(51, 170, 255, 0.25);">
+    <div class="row d-flex">
+        <div class="container mt-5 mx-5 p-5 " style="background:rgba(51, 170, 255, 0.25);">
             <div class="row justify-content-end">
                 <div class="col-10" style=" font-size: x-large;">
                         <span th:text="${petition.title}">
@@ -63,7 +63,7 @@
                         </span>
                 </div>
                 <div class="col-2">
-                    <span th:text="${petition.signatures}">
+                    <span th:text="${#lists.size(petition.signatures)}">
                         000
                     </span>
                     <br><br><br>
@@ -71,6 +71,7 @@
                         Autor
                     </span>
                 </div>
+
             </div>
             <div class="row justify-content-end mt-5">
                 <div class="col-12">
@@ -82,6 +83,9 @@
                             </div>
                         </div>
                     </form>
+                    <ul >
+                        <li th:each="signature : ${petition.signatures}" th:text="${signature.author}"></li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ public class GetPetitionDTO {
   private Integer id;
   private String title;
   private String content;
-  private AuthorDTO author;
+  private String author;
   private List<SignatureDTO> signatures;
 
 
@@ -29,39 +29,16 @@ public class GetPetitionDTO {
   @NoArgsConstructor
   @AllArgsConstructor
   @Builder
-  public static final class AuthorDTO {
-
-    private Integer id;
-    private String name;
-    private String email;
-
-    public static AuthorDTO toDTO(User author) {
-
-      return AuthorDTO.builder()
-          .id(author.getId())
-          .name(author.getName())
-          .email(author.getEmail())
-          .build();
-
-    }
-  }
-
-  @Data
-  @NoArgsConstructor
-  @AllArgsConstructor
-  @Builder
   public static final class SignatureDTO {
 
     private Integer id;
-    private AuthorDTO author;
-    private LocalDateTime timestamp;
+    private String author;
 
     public static SignatureDTO toDTO(Signature signature) {
 
       return SignatureDTO.builder()
           .id(signature.getId())
-          .author(AuthorDTO.toDTO(signature.getAuthor()))
-          .timestamp(signature.getTimestamp())
+          .author(signature.getAuthor())
           .build();
     }
   }
