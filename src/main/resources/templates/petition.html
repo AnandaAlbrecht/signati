@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments::head('Home')}">
+<head th:replace="~{fragments::head('Petição')}">
 </head>
 
 <!--<head>
@@ -58,9 +58,9 @@
             </div>
             <div class="row justify-content-end">
                 <div class="col-10" style=" font-size: large;">
-                        <span th:text="${petition.content}">
-                            Conteúdo
-                        </span>
+                    <span th:text="${petition.content}">
+                        Conteúdo
+                    </span>
                 </div>
                 <div class="col-2">
                     <span th:text="${#lists.size(petition.signatures)}">
@@ -75,11 +75,11 @@
             </div>
             <div class="row justify-content-end mt-5">
                 <div class="col-12">
-                    <form>
+                    <form th:object="${PostSignatureDTO}" th:action="${action}" method="POST">
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" class="form-control" placeholder="Email" required>
                             <div class="input-group-append">
-                                <button class="btn btn-primary px-5" type="button">Assinar</button>
+                                <button class="btn btn-primary px-5" type="submit">Assinar</button>
                             </div>
                         </div>
                     </form>
