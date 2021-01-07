@@ -75,9 +75,9 @@
             </div>
             <div class="row justify-content-end mt-5">
                 <div class="col-12">
-                    <form th:object="${PostSignatureDTO}" th:action="${action}" method="POST">
+                    <form th:object="${postSignatureDTO}" th:action="@{${petitionId}/signature}" method="POST">
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Email" required>
+                            <input type="email" class="form-control" placeholder="Email" required >
                             <div class="input-group-append">
                                 <button class="btn btn-primary px-5" type="submit">Assinar</button>
                             </div>

@@ -7,13 +7,8 @@ import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,9 +20,14 @@ public class PetitionController {
 
   @PostMapping
   @ResponseBody
-  public GetPetitionDTO postPetition(@Valid @RequestBody PetitionPostDTO petitionPost) {
-
-    return this.petitionService.postPetition(petitionPost);
+  public ModelAndView postPetition(@Valid @ModelAttribute PetitionPostDTO petitionPost, BindingResult result) {
+      var petition = this.petitionService.postPetition(petitionPost);
+      //this.getPetition(petition.getId());
+      System.out.println("teste" + this.getPetition(petition.getId()));
+      var dto = this.petitionService.getPetitionDTOById(petition.getId());
+      var mv = new ModelAndView("petition");
+      mv.addObject("petition", dto);
+      return mv;
   }
 
   @GetMapping("/{petitionId}")
@@ -46,5 +46,15 @@ public class PetitionController {
 
     return this.petitionService.getAllPetitionsByQuery(query);
   }
+
+  @GetMapping ("/petition-creation")
+  public ModelAndView create(){
+    var mv = new ModelAndView("new");
+    mv.addObject("petitionPostDTO", new PetitionPostDTO());
+    return mv;
+  }
+
+
+
 
 }

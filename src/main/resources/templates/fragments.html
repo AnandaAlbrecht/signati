@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -20,8 +22,9 @@
             </div>
             <div class="col-6"></div>
             <div class="col-3 pl-5">
-                <button class="btn btn-primary" th:onclick="'window.location.href=\'/new\''">Nova Petição</button>
-                <button class="btn btn-primary" th:onclick="'window.location.href=\'/home\''">Home</button>
+                <a th:href="@{/petitions/petition-creation}"><button class="btn btn-primary">Nova Petição</button></a>
+                <!--th:onclick="'window.location.href=\'/new\''"-->
+                <a th:href="@{/}"><button class="btn btn-primary">Home</button></a>
             </div>
         </div>
     </div>
