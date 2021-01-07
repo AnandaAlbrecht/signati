@@ -14,13 +14,13 @@ public class SignatureService {
   private final UserService userService;
   private final PetitionService petitionService;
 
-  public Signature postSignature(Integer petitionId, PostSignatureDTO postSignatureDTO) {
+  public void postSignature(Integer petitionId, PostSignatureDTO postSignatureDTO) {
 
     var signature = Signature.builder()
         .author(postSignatureDTO.getAuthor())
         .petition(petitionService.findPetitionById(petitionId))
         .build();
 
-    return signatureRepository.save(signature);
+    signatureRepository.save(signature);
   }
 }

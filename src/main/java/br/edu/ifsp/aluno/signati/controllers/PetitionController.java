@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/petitions")
@@ -21,14 +22,12 @@ public class PetitionController {
 
   @PostMapping
   @ResponseBody
-  public ModelAndView postPetition(@Valid @ModelAttribute PetitionPostDTO petitionPost, BindingResult result) {
-      var petition = this.petitionService.postPetition(petitionPost);
-      //this.getPetition(petition.getId());
-      System.out.println("teste" + this.getPetition(petition.getId()));
-      var dto = this.petitionService.getPetitionDTOById(petition.getId());
-      var mv = new ModelAndView("petition");
-      mv.addObject("petition", dto);
-      return mv;
+  public RedirectView postPetition(@Valid @ModelAttribute PetitionPostDTO petitionPost,
+      BindingResult result) {
+
+    var petition = this.petitionService.postPetition(petitionPost);
+
+    return new RedirectView("/petitions/" + petition.getId());
   }
 
   @GetMapping("/{petitionId}")
@@ -49,14 +48,12 @@ public class PetitionController {
     return this.petitionService.getAllPetitionsByQuery(query);
   }
 
-  @GetMapping ("/petition-creation")
-  public ModelAndView create(){
+  @GetMapping("/petition-creation")
+  public ModelAndView create() {
     var mv = new ModelAndView("new");
     mv.addObject("petitionPostDTO", new PetitionPostDTO());
     return mv;
   }
-
-
 
 
 }
