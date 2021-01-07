@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
-public class HelloController {
+public class HomeController {
 
     private final PetitionService petitionService;
 
