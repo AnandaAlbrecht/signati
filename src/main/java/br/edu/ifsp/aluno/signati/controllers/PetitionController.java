@@ -2,6 +2,7 @@ package br.edu.ifsp.aluno.signati.controllers;
 
 import br.edu.ifsp.aluno.signati.dto.petition.GetPetitionDTO;
 import br.edu.ifsp.aluno.signati.dto.petition.PetitionPostDTO;
+import br.edu.ifsp.aluno.signati.dto.signature.PostSignatureDTO;
 import br.edu.ifsp.aluno.signati.services.PetitionService;
 import java.util.List;
 import javax.validation.Valid;
@@ -36,6 +37,7 @@ public class PetitionController {
     var dto = this.petitionService.getPetitionDTOById(petitionId);
     var mv = new ModelAndView("petition");
     mv.addObject("petition", dto);
+    mv.addObject("postSignatureDTO", new PostSignatureDTO());
     return mv;
   }
 
