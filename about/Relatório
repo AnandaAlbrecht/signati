@@ -20,3 +20,6 @@ o Padrão de rotas do sistema:
 |   /petitions/new              |   POST    |
 |   /petitions/{id}/signature   |   POST    |
  -------------------------------------------
+
+o Vídeo:
+    PATH: about/Vídeo - Projeto Grupo - DevWeb - Parte 1.mp4
