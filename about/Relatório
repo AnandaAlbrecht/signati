@@ -10,3 +10,13 @@ o Design das telas
     LINK: https://framer.com/share/Signati--12smaAgJm7GO7JAM7Qcc/JQte2U7WD
 
 o Padrão de rotas do sistema:
+ -------------------------------------------
+|   ROTA                        |   VERBO   |
+ -------------------------------------------
+|   /                           |   GET     |
+|   /petitions                  |   GET     |
+|   /petitions                  |   POST    |
+|   /petitions/{id}             |   GET     |
+|   /petitions/new              |   POST    |
+|   /petitions/{id}/signature   |   POST    |
+ -------------------------------------------
