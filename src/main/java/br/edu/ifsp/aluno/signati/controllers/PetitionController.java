@@ -48,7 +48,7 @@ public class PetitionController {
     return this.petitionService.getAllPetitionsByQuery(query);
   }
 
-  @GetMapping("/petition-creation")
+  @GetMapping("/new")
   public ModelAndView create() {
     var mv = new ModelAndView("new");
     mv.addObject("petitionPostDTO", new PetitionPostDTO());
