@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments::head('Editar Petição')}">
+</head>
+
+<body style="background-color: black">
+
+<header th:replace="~{fragments :: header}">
+</header>
+
+<div class="container p-5" style="background-color: white">
+    <div class="row justify-content-around" style="font-size: xxx-large">
+        Editar Petição
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <form th:object="${petitionPostDTO}" th:action="@{/petitions}" method="POST">
+                <input type="text" class="form-control my-5" placeholder="Título" required th:field="*{title}" th:value="${petition.title}">
+                <textarea class="form-control my-5" rows="10" style="height:100%;" placeholder="Descrição" required th:field="*{content}" th:value="${petition.content}"></textarea>
+                <div class="col d-flex justify-content-between">
+                    <button class="btn btn-primary px-5" th:action="@{/petitions/{id}/delete(id=${petition.id})}">Excluir</button>
+                    <button class="btn btn-primary px-5" th:action="@{/}">Cancelar</button>
+                    <button class="btn btn-primary px-5" type="submit">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
