@@ -14,7 +14,7 @@ public class HomeController {
 
     private final PetitionService petitionService;
 
-    @GetMapping
+    @GetMapping("/")
     public ModelAndView homeController(){
 
         var mv = new ModelAndView("home");

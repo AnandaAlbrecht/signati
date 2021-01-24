@@ -85,6 +85,7 @@ public class PetitionController {
   public ModelAndView delete(@PathVariable Integer petitionId) {
     var mv = new ModelAndView("redirect:/");
 
+
     try {
       this.petitionRepository.deleteById(petitionId);
       mv.addObject("message", "Petição #" + petitionId + " excluída com sucesso!");
