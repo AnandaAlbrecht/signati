@@ -66,7 +66,10 @@
 
     <div class="row justify-content-start ml-2">
         <ul class="mt-3 ml-5" >
-            <li th:each="signature : ${petition.signatures}" th:text="${signature.author}"></li>
+            <!--<li th:each="signature : ${petition.signatures}" th:text="${signature.author}" th:onclick=""></li>-->
+            <li th:each="signature : ${petition.signatures}">
+                <a th:text="${signature.author}" th:href="@{/petitions/{id}/signature/{signId}(id=${petition.id}, signId=${signature.id})}"></a>
+            </li>
         </ul>
     </div>
 </div>

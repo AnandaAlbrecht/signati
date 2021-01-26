@@ -1,6 +1,7 @@
 package br.edu.ifsp.aluno.signati.services;
 
 import br.edu.ifsp.aluno.signati.dto.signature.PostSignatureDTO;
+import br.edu.ifsp.aluno.signati.models.Petition;
 import br.edu.ifsp.aluno.signati.models.Signature;
 import br.edu.ifsp.aluno.signati.repositories.SignatureRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +23,10 @@ public class SignatureService {
         .build();
 
     signatureRepository.save(signature);
+  }
+
+  protected Signature findSignatureById(Integer signatureId) {
+
+    return this.signatureRepository.findById(signatureId).orElse(null);
   }
 }
