@@ -3,6 +3,7 @@ package br.edu.ifsp.aluno.signati.services;
 import br.edu.ifsp.aluno.signati.dto.petition.GetPetitionDTO;
 import br.edu.ifsp.aluno.signati.dto.petition.PetitionPostDTO;
 import br.edu.ifsp.aluno.signati.models.Petition;
+import br.edu.ifsp.aluno.signati.models.Signature;
 import br.edu.ifsp.aluno.signati.repositories.PetitionRepository;
 import java.util.List;
 import java.util.Objects;
@@ -40,8 +41,25 @@ public class PetitionService {
     return petitions.stream().map(Petition::toDTO).collect(Collectors.toList());
   }
 
-  protected Petition findPetitionById(Integer petitionId) {
+  public Petition findPetitionById(Integer petitionId) {
 
-    return this.petitionRepository.findById(petitionId).orElse(null);
+    return this.petitionRepository.findById(petitionId).orElseThrow(RuntimeException::new);
+  }
+
+
+  public void deletePetition(Integer petitionId) {
+    this.petitionRepository.deleteById(petitionId);
+  }
+
+  public void updatePetition(Integer petitionId, PetitionPostDTO petitionPut) {
+
+    var petition = this.findPetitionById(petitionId);
+    petition.updatePetition(petitionPut);
+
+    this.petitionRepository.save(petition);
+  }
+
+  public void removeSignature(Signature signature){
+
   }
 }

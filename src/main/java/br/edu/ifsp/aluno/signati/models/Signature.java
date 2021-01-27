@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -25,6 +26,7 @@ public class Signature {
   private Integer id;
 
   @ManyToOne
+  @EqualsAndHashCode.Exclude
   private Petition petition;
 
   private String author;

@@ -3,28 +3,35 @@ package br.edu.ifsp.aluno.signati.controllers;
 import br.edu.ifsp.aluno.signati.dto.petition.GetPetitionDTO;
 import br.edu.ifsp.aluno.signati.dto.petition.PetitionPostDTO;
 import br.edu.ifsp.aluno.signati.dto.signature.PostSignatureDTO;
-import br.edu.ifsp.aluno.signati.models.Petition;
-import br.edu.ifsp.aluno.signati.repositories.PetitionRepository;
 import br.edu.ifsp.aluno.signati.services.PetitionService;
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/petitions")
 @RequiredArgsConstructor
 public class PetitionController {
-
-  @Autowired
-  private PetitionRepository petitionRepository;
 
   private final PetitionService petitionService;
 
@@ -64,46 +71,50 @@ public class PetitionController {
   }
 
   @GetMapping("/{petitionId}/edit")
-  public ModelAndView edit(@PathVariable Integer petitionId) {
-    Optional<Petition> optional = this.petitionRepository.findById(petitionId);
+  public ModelAndView getEdit(@PathVariable Integer petitionId) {
 
-    if (optional.isPresent()) {
-      var dto = this.petitionService.getPetitionDTOById(petitionId);
+    var dto = this.petitionService.getPetitionDTOById(petitionId);
 
-      var mv = new ModelAndView("edit");
-      mv.addObject("petition", dto);
-      mv.addObject("petitionPostDTO", dto);
+    var mv = new ModelAndView("edit");
+    mv.addObject("petition", dto);
+    mv.addObject("petitionPostDTO", dto);
 
-      return mv;
+    return mv;
 
-    }else {
-      return this.petitionError("EDIT ERROR: Petição #" + petitionId + " não encontrada!");
-    }
   }
 
-  @GetMapping("/{petitionId}/delete")
-  public ModelAndView delete(@PathVariable Integer petitionId) {
-    var mv = new ModelAndView("redirect:/");
+  @PostMapping("/{petitionId}/edit")
+  public RedirectView edit(@PathVariable Integer petitionId,
+      @ModelAttribute PetitionPostDTO petitionPut) {
 
+    this.petitionService.updatePetition(petitionId, petitionPut);
+    return new RedirectView("/petitions/" + petitionId);
+  }
 
-    try {
-      this.petitionRepository.deleteById(petitionId);
-      mv.addObject("message", "Petição #" + petitionId + " excluída com sucesso!");
-      mv.addObject("error", false);
-    }
-    catch (EmptyResultDataAccessException e) {
-      System.out.println(e);
-      mv = this.petitionError("DELETE ERROR: Petição #" + petitionId + " não encontrada!");
-    }
+  @PostMapping("/{petitionId}/delete")
+  public RedirectView delete(@PathVariable Integer petitionId) {
+    var mv = new RedirectView("/");
+
+    this.petitionService.deletePetition(petitionId);
 
     return mv;
   }
 
-  private ModelAndView petitionError(String msg) {
-   var mv = new ModelAndView("redirect:/");
-    mv.addObject("message", msg);
-    mv.addObject("error", true);
-    return mv;
+  @ExceptionHandler(Exception.class)
+  private RedirectView petitionError(EmptyResultDataAccessException ex,
+      HttpServletRequest request,
+      HttpServletResponse response)
+      throws IOException {
+
+    RedirectView rw = new RedirectView("/");
+    rw.setStatusCode(HttpStatus.MOVED_PERMANENTLY); // you might not need this
+    FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(request);
+    if (Objects.nonNull(outputFlashMap)) {
+      outputFlashMap.put("myAttribute", true);
+      outputFlashMap.put("message", true);
+      outputFlashMap.put("error", true);
+    }
+    return rw;
   }
 
 }
