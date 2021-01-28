@@ -15,9 +15,11 @@
     </div>
 
     <div class="row">
-        <div class="container mt-5 mx-5 p-5 " style="background:rgba(51, 170, 255, 0.25);">
-
+        <div class="container mt-5 mx-5 pb-5 pl-5" style="background:rgba(51, 170, 255, 0.25);">
             <div class="row justify-content-end">
+                <a th:href="@{/petitions/{id}/edit(id=${petition.id})}"><button class="btn btn-primary float-right m-1"><i class='fas fa-pencil-alt'></i></button></a>
+            </div>
+            <div class="row justify-content-end mr-5">
                 <div class="col-10" style=" font-size: x-large;">
                     <span class="span-texatarea" th:text="${petition.title}">
                         Título
@@ -30,7 +32,7 @@
 
             </div>
 
-            <div class="row justify-content-end">
+            <div class="row justify-content-end mr-5">
                 <div class="col-10" style=" font-size: large;">
                     <span class="span-texatarea " th:text="${petition.content}">
                         Conteúdo
@@ -47,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="row justify-content-end mt-5">
+            <div class="row justify-content-end mt-5 mr-5">
                 <div class="col-12">
                     <form th:object="${postSignatureDTO}" th:action="@{/petitions/{id}/signature(id=${petition.id})}" method="POST">
                         <div class="input-group">
@@ -59,9 +61,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col mt-2">
-                <a th:href="@{/petitions/{id}/edit(id=${petition.id})}"><button class="btn btn-primary mt-5 float-right m-1"><i class='fas fa-pencil-alt'></i></button></a>
-            </div>
+
         </div>
     </div>
 
