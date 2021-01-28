@@ -14,8 +14,8 @@ public class HomeController {
 
     private final PetitionService petitionService;
 
-    @GetMapping
-    public ModelAndView helloController(){
+    @GetMapping("/")
+    public ModelAndView homeController(){
 
         var mv = new ModelAndView("home");
         mv.addObject("petitions", petitionService.getAllPetitionsByQuery(null));

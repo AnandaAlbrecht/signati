@@ -15,20 +15,24 @@
     </div>
 
     <div class="row">
-        <div class="container mt-5 mx-5 p-5 " style="background:rgba(51, 170, 255, 0.25);">
-
+        <div class="container mt-5 mx-5 pb-5 pl-5" style="background:rgba(51, 170, 255, 0.25);">
             <div class="row justify-content-end">
+                <a th:href="@{/petitions/{id}/edit(id=${petition.id})}"><button class="btn btn-primary float-right m-1"><i class='fas fa-pencil-alt'></i></button></a>
+            </div>
+            <div class="row justify-content-end mr-5">
                 <div class="col-10" style=" font-size: x-large;">
                     <span class="span-texatarea" th:text="${petition.title}">
                         Título
                     </span>
+
                 </div>
                 <div class="col-2">
                     <img class="mb-3 ml-3" th:src="@{/images/feather_black.png}" alt="" style="width:50px;height:50px;">
                 </div>
+
             </div>
 
-            <div class="row justify-content-end">
+            <div class="row justify-content-end mr-5">
                 <div class="col-10" style=" font-size: large;">
                     <span class="span-texatarea " th:text="${petition.content}">
                         Conteúdo
@@ -45,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="row justify-content-end mt-5">
+            <div class="row justify-content-end mt-5 mr-5">
                 <div class="col-12">
                     <form th:object="${postSignatureDTO}" th:action="@{/petitions/{id}/signature(id=${petition.id})}" method="POST">
                         <div class="input-group">
@@ -57,16 +61,34 @@
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
+
 
     <div class="row justify-content-start mt-3 ml-5" style="font-size: x-large">
         Assinaturas:
     </div>
 
-    <div class="row justify-content-start ml-2">
-        <ul class="mt-3 ml-5" >
-            <li th:each="signature : ${petition.signatures}" th:text="${signature.author}"></li>
+    <div class="row justify-content-start ml-2 contaier-fluid w-100">
+        <ul class="mt-3 ml-5 list-group list-group-flush" >
+            <!--<li th:each="signature : ${petition.signatures}" th:text="${signature.author}" th:onclick=""></li>-->
+            <li class="list-group-item" th:each="signature : ${petition.signatures}">
+                <div class="d-flex  justify-content-between align-items-center">
+                    <span th:text="${signature.author}"></span>
+                    <form
+                        th:action="@{/petitions/{id}/signature/{signId}/delete(id=${petition.id}, signId=${signature.id})}"
+                        method="POST">
+
+                        <button class="btn btn-danger mx-5">
+                            <small><i
+                            class='fas fa-trash-alt'></i>
+                            </small>
+                        </button>
+
+                    </form>
+                </div>
+            </li>
         </ul>
     </div>
 </div>

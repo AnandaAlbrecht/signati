@@ -2,6 +2,7 @@ package br.edu.ifsp.aluno.signati.models;
 
 import br.edu.ifsp.aluno.signati.dto.petition.GetPetitionDTO;
 import br.edu.ifsp.aluno.signati.dto.petition.GetPetitionDTO.SignatureDTO;
+import br.edu.ifsp.aluno.signati.dto.petition.PetitionPostDTO;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,7 +37,7 @@ public class Petition {
 
   private String author;
 
-  @OneToMany(mappedBy = "petition", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "petition", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Signature> signatures;
 
   public GetPetitionDTO toDTO() {
@@ -52,6 +53,12 @@ public class Petition {
             .map(SignatureDTO::toDTO)
             .collect(Collectors.toList()))
         .build();
+  }
+
+  public void updatePetition(PetitionPostDTO dto) {
+
+    this.setContent(dto.getContent());
+    this.setTitle(dto.getTitle());
   }
 
 }
